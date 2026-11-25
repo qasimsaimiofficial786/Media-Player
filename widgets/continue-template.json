@@ -1,0 +1,74 @@
+{
+ "type": "AdaptiveCard",
+ "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+ "version": "1.5",
+ "body": [
+  {
+   "type": "TextBlock",
+   "text": "Continue",
+   "isSubtle": true,
+   "size": "Small",
+   "weight": "Bolder"
+  },
+  {
+   "type": "ColumnSet",
+   "columns": [
+    {
+     "type": "Column",
+     "width": "auto",
+     "$when": "${thumb != ''}",
+     "items": [
+      {
+       "type": "Image",
+       "url": "${thumb}",
+       "size": "Large",
+       "altText": "Cover"
+      }
+     ]
+    },
+    {
+     "type": "Column",
+     "width": "stretch",
+     "verticalContentAlignment": "Center",
+     "items": [
+      {
+       "type": "TextBlock",
+       "text": "${title}",
+       "weight": "Bolder",
+       "size": "Medium",
+       "wrap": true,
+       "maxLines": 2
+      },
+      {
+       "type": "TextBlock",
+       "text": "${sub}",
+       "isSubtle": true,
+       "spacing": "None",
+       "wrap": true
+      },
+      {
+       "type": "TextBlock",
+       "text": "${progress}",
+       "isSubtle": true,
+       "size": "Small",
+       "spacing": "Small",
+       "$when": "${progress != ''}"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "actions": [
+  {
+   "type": "Action.Execute",
+   "title": "Resume",
+   "verb": "resume"
+  },
+  {
+   "type": "Action.Execute",
+   "title": "Next",
+   "verb": "next"
+  }
+ ]
+}

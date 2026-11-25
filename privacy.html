@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy policy · Media Player</title><meta name="description" content="What Media Player stores on your device, what it never sends, and the few optional features that use the network."><meta name="robots" content="index,follow"><meta name="theme-color" content="#f4a261"><link rel="icon" href="icons/icon-192.png"><style>
+:root{--bg:#fffaf6;--ink:#1c1b1f;--mut:#5a5560;--ac:#a8531c;--bd:#e7ddd4;--sf:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#16130f;--ink:#f3ede7;--mut:#b7aea5;--ac:#f4a261;--bd:#3a332c;--sf:#1f1b17}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:28px 20px 72px}
+a{color:var(--ac)}a:focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:3px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.top a.back{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;font-weight:600;text-decoration:none}
+h1{font-size:clamp(1.8rem,5vw,2.4rem);line-height:1.15;margin:0 0 6px}
+h2{font-size:1.2rem;margin:34px 0 8px}
+p,li{color:var(--ink)}.mut{color:var(--mut);font-size:.92rem}
+ul{padding-left:1.2em}li{margin:.35em 0}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:16px 18px;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.95rem}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--bd);vertical-align:top}th{color:var(--mut);font-weight:600;font-size:.85rem}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--bd);font-size:.9rem;color:var(--mut)}
+footer a{margin-right:14px}
+</style></head><body><main><div class="top"><a class="back" href="./">← Media Player</a></div>
+<h1>Privacy policy</h1><p class="mut">Last updated October 2026</p>
+<div class="card"><p><b>In short.</b> Media Player has no accounts, no ads, no analytics and no cookies. Your music, videos, playlists and settings stay on your own device. The app does not upload them anywhere.</p></div>
+<h2>What is stored on your device</h2>
+<ul><li>Your library list: file names, titles, durations, folders, favourites, playlists, bookmarks and playback positions.</li>
+<li>Your settings, listening history and listening-time statistics. The statistics are calculated and kept on the device only.</li>
+<li>Copies of media files, only if you choose “copy” storage for them. Linked files are not copied.</li>
+<li>The Vault, if you use it: files encrypted with a key that is protected by your PIN or password. Nobody, including the publisher, can recover them without your PIN or recovery code.</li>
+<li>The app’s own files, saved by the browser so that the app works offline.</li></ul>
+<p>This data lives in the browser storage of the device (IndexedDB, local storage and the cache). It is not sent to the publisher. You can delete it at any time in <b>Settings → Security and privacy → Erase all app data</b>, or by clearing the site data in your browser.</p>
+<h2>What can leave your device</h2>
+<p>Nothing is sent by default. These optional features use the network only when you start them:</p>
+<table><thead><tr><th>Feature</th><th>What is sent, and to whom</th></tr></thead><tbody>
+<tr><td>Sharing with a 6-digit code</td><td>Encrypted connection messages pass through the free public relay <b>ntfy.sh</b>. The messages are encrypted with the code. The relay can see that a message was sent and the sender’s IP address, but not its content. Files never go through the relay.</td></tr>
+<tr><td>Sharing over the internet (“Anywhere”)</td><td>Files go directly from one device to the other. To find a route, the browser contacts a public STUN server (<b>stun.l.google.com</b>), which can see your public IP address. “Same Wi-Fi only” avoids this.</td></tr>
+<tr><td>Loading the app</td><td>The website that hosts this copy of the app receives the usual request details (such as IP address and time) when you open it, and keeps logs according to its own policy. This is outside the app.</td></tr></tbody></table>
+<h2>Cookies and tracking</h2>
+<p>The app sets no cookies and has no tracking or advertising code, so there is nothing to accept or refuse.</p>
+<h2>Children</h2>
+<p>The app collects no personal information from anyone, including children, and has no accounts or sign-up.</p>
+<h2>Security</h2>
+<p>The app uses a strict content security policy, encrypts the Vault with AES-256-GCM and limits repeated attempts. To report a problem, see <a href="/.well-known/security.txt">security.txt</a>.</p>
+<h2>Changes and contact</h2>
+<p>If this policy changes, the date above changes. For questions about this copy of the app, contact the person or organisation that published it.</p><footer><a href="./">Open the app</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="licenses.html">Licences</a></footer></main></body></html>

@@ -1,0 +1,16 @@
+{
+  "name": "media-player-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Android shell for Media Player: finds music and videos on the phone automatically",
+  "scripts": {
+    "build:web": "python3 scripts/build_web.py",
+    "android:prepare": "npx cap add android && python3 scripts/prepare_android.py && npx cap sync android",
+    "android:apk": "cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
+  }
+}

@@ -1,0 +1,92 @@
+# One workflow for everything. Push this folder to a GitHub repository (branch "main").
+# It publishes the web app (installable on every device) and builds the Android app and the
+# Windows, macOS and Linux installers and puts them on the Releases page. The public Install dialog shows only the
+# warning-free web install, unless you set the repository variable SHOW_INSTALLERS to true (Settings > Variables).
+# One-time setup: Settings > Pages > Source: "GitHub Actions".
+name: Publish Media Player
+on: { workflow_dispatch: {}, push: { branches: [main] } }
+permissions: { contents: write, pages: write, id-token: write }
+concurrency: { group: publish, cancel-in-progress: true }
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: '${{ steps.deploy.outputs.page_url }}' }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble the website
+        run: |
+          mkdir _site
+          cp -r index.html qr-scan.js qr-gen.js sw.js manifest.webmanifest icons widgets _site/
+          mkdir _site/downloads
+          if [ "${{ vars.SHOW_INSTALLERS }}" = "true" ]; then
+            B="https://github.com/${{ github.repository }}/releases/download/latest"
+            printf '[{"url":"%s/MediaPlayer-android.apk","label":"Android app (APK)"},{"url":"%s/MediaPlayer-win.exe","label":"Windows installer"},{"url":"%s/MediaPlayer-mac.dmg","label":"Mac app"},{"url":"%s/MediaPlayer-linux.AppImage","label":"Linux app (AppImage)"}]' "$B" "$B" "$B" "$B" > _site/downloads/index.json
+          else
+            echo '[]' > _site/downloads/index.json
+          fi
+          touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  android:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    defaults: { run: { working-directory: native } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - run: npm install
+      - run: python3 scripts/build_web.py
+      - run: npx cap add android && python3 scripts/prepare_android.py && npx cap sync android
+      - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
+      - run: cp android/app/build/outputs/apk/debug/app-debug.apk MediaPlayer-android.apk
+      - uses: actions/upload-artifact@v4
+        with: { name: installer-android, path: native/MediaPlayer-android.apk }
+
+  desktop:
+    strategy:
+      fail-fast: false
+      matrix: { os: [windows-latest, macos-latest, ubuntu-latest] }
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python scripts/build_web.py
+        working-directory: native
+      - run: npm install && npm run dist
+        working-directory: native/desktop
+        env: { CSC_IDENTITY_AUTO_DISCOVERY: 'false' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installer-${{ matrix.os }}
+          path: |
+            native/desktop/dist/MediaPlayer-*.exe
+            native/desktop/dist/MediaPlayer-*.dmg
+            native/desktop/dist/MediaPlayer-*.AppImage
+            native/desktop/dist/MediaPlayer-*.deb
+
+  release:
+    needs: [android, desktop]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { pattern: installer-*, path: out, merge-multiple: true }
+      - run: ls -la out
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Media Player (latest installers)
+          body: Installers for Android, Windows, macOS and Linux. Open the web address of the app to install it on any other device.
+          files: out/*
+          overwrite_files: true

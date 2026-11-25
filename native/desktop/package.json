@@ -1,0 +1,41 @@
+{
+  "name": "media-player-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "main": "main.js",
+  "description": "Windows, macOS and Linux shell for Media Player: finds music and videos automatically",
+  "author": "Media Player <noreply@example.com>",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "app.mediaplayer.pro",
+    "productName": "Media Player",
+    "files": [
+      "main.js",
+      "preload.js",
+      "www/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.music"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "AudioVideo"
+    },
+    "artifactName": "MediaPlayer-${os}.${ext}"
+  },
+  "homepage": "https://example.com"
+}

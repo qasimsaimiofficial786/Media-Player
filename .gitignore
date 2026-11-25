@@ -1,0 +1,7 @@
+node_modules/
+.antigravity/
+.vscode/
+.env
+.env.*
+dist/
+build/

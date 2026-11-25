@@ -1,0 +1,225 @@
+{
+ "name": "Professional Media Player",
+ "short_name": "Media Player",
+ "description": "Local-first audio and video player. Your files never leave your device.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#fffaf6",
+ "theme_color": "#f4a261",
+ "categories": [
+  "music",
+  "entertainment",
+  "multimedia"
+ ],
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "file_handlers": [
+  {
+   "action": "./",
+   "accept": {
+    "audio/*": [
+     ".mp3",
+     ".m4a",
+     ".aac",
+     ".wav",
+     ".flac",
+     ".ogg",
+     ".opus"
+    ],
+    "video/*": [
+     ".mp4",
+     ".webm",
+     ".mkv",
+     ".mov",
+     ".m4v"
+    ]
+   }
+  }
+ ],
+ "launch_handler": {
+  "client_mode": "focus-existing"
+ },
+ "shortcuts": [
+  {
+   "name": "Continue",
+   "short_name": "Continue",
+   "url": "./?cmd=resume",
+   "icons": [
+    {
+     "src": "icons/icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Shuffle music",
+   "short_name": "Shuffle",
+   "url": "./?cmd=shuffle",
+   "icons": [
+    {
+     "src": "icons/icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Videos",
+   "url": "./?cmd=videos",
+   "icons": [
+    {
+     "src": "icons/icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Music",
+   "url": "./?cmd=music",
+   "icons": [
+    {
+     "src": "icons/icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Share files",
+   "url": "./?cmd=share",
+   "icons": [
+    {
+     "src": "icons/icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  }
+ ],
+ "share_target": {
+  "action": "./share-target",
+  "method": "POST",
+  "enctype": "multipart/form-data",
+  "params": {
+   "files": [
+    {
+     "name": "media",
+     "accept": [
+      "audio/*",
+      "video/*",
+      ".mp3",
+      ".m4a",
+      ".flac",
+      ".wav",
+      ".ogg",
+      ".opus",
+      ".mp4",
+      ".webm",
+      ".mkv",
+      ".srt",
+      ".vtt",
+      ".ass",
+      ".lrc"
+     ]
+    }
+   ]
+  }
+ },
+ "widgets": [
+  {
+   "name": "Continue",
+   "short_name": "Continue",
+   "description": "Pick up where you left off in Media Player.",
+   "tag": "mp-continue",
+   "ms_ac_template": "widgets/continue-template.json",
+   "data": "widgets/continue-data.json",
+   "type": "application/json",
+   "screenshots": [
+    {
+     "src": "widgets/preview-continue.png",
+     "sizes": "600x400",
+     "label": "Continue"
+    }
+   ],
+   "icons": [
+    {
+     "src": "icons/icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ],
+   "auth": false,
+   "update": 900
+  },
+  {
+   "name": "Recently played",
+   "short_name": "Recently played",
+   "description": "Your latest songs and videos.",
+   "tag": "mp-recent",
+   "ms_ac_template": "widgets/recent-template.json",
+   "data": "widgets/recent-data.json",
+   "type": "application/json",
+   "screenshots": [
+    {
+     "src": "widgets/preview-recent.png",
+     "sizes": "600x400",
+     "label": "Recently played"
+    }
+   ],
+   "icons": [
+    {
+     "src": "icons/icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ],
+   "auth": false,
+   "update": 900
+  },
+  {
+   "name": "Quick actions",
+   "short_name": "Quick actions",
+   "description": "Resume, shuffle and open Media Player.",
+   "tag": "mp-quick",
+   "ms_ac_template": "widgets/quick-template.json",
+   "data": "widgets/quick-data.json",
+   "type": "application/json",
+   "screenshots": [
+    {
+     "src": "widgets/preview-quick.png",
+     "sizes": "600x400",
+     "label": "Quick actions"
+    }
+   ],
+   "icons": [
+    {
+     "src": "icons/icon-192.png",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ],
+   "auth": false,
+   "update": 3600
+  }
+ ]
+}
